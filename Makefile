@@ -118,11 +118,7 @@ pre-commit-uninstall:
 
 .PHONY: suse-package
 suse-package:
-	ci/packaging/suse/rpmfiles_maker.sh "$(VERSION)" "$(TAG)" "$(CLOSEST_TAG)"
-
-.PHONY: suse-changelog
-suse-changelog:
-	ci/packaging/suse/changelog_maker.sh "$(CHANGES)"
+	ci/packaging/suse/rpmfiles_maker.sh "$(TAG)"
 
 # tests
 .PHONY: test

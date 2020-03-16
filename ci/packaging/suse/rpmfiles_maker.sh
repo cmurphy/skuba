@@ -28,7 +28,9 @@ then
     log "Updating IBS branch"
     (
         cd "$work_dir"
-        osc service disabledrun
+        osc rm *.obscpio
+        osc service disabledrun # need to use disabledrun even though it's deprecated, see https://github.com/openSUSE/osc/pull/769
+        osc add *.obscpio
     )
     osc -A 'https://api.suse.de' ci "$work_dir" \
          -m "$(sed '1,/^$/d;/^$/,$d' "${work_dir}/skuba.changes")"

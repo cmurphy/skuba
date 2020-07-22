@@ -84,6 +84,7 @@ func kubernetesParseInterfaceVersions(data interface{}) (string, string, error) 
 func kubernetesFreshInstallAllPkgs(t *Target, data interface{}) error {
 	// This only applies on new nodes (bootstrap/join)
 	current, _, err := kubernetesParseInterfaceVersions(data)
+	k8sCurrent := "1.16"
 	if err != nil {
 		return err
 	}
@@ -92,9 +93,9 @@ func kubernetesFreshInstallAllPkgs(t *Target, data interface{}) error {
 	// Standard packages for a new cluster
 	pkgs = append(pkgs, "+caasp-release", "skuba-update", "supportutils-plugin-suse-caasp")
 	// Version specific
-	pkgs = append(pkgs, fmt.Sprintf("+kubernetes-%s-kubeadm", current))
-	pkgs = append(pkgs, fmt.Sprintf("+kubernetes-%s-kubelet", current))
-	pkgs = append(pkgs, fmt.Sprintf("+kubernetes-%s-client", current))
+	pkgs = append(pkgs, fmt.Sprintf("+kubernetes-%s-kubeadm", k8sCurrent))
+	pkgs = append(pkgs, fmt.Sprintf("+kubernetes-%s-kubelet", k8sCurrent))
+	pkgs = append(pkgs, fmt.Sprintf("+kubernetes-%s-client", k8sCurrent))
 	pkgs = append(pkgs, fmt.Sprintf("+cri-o-%s*", current))
 	pkgs = append(pkgs, fmt.Sprintf("+cri-tools-%s*", current))
 
